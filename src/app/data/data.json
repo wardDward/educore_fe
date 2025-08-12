@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "image": "https://images.unsplash.com/photo-1642649149963-0ef6779df6c6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "title": "Introduction to Web  Development",
+    "author": "Sarah Johnson",
+    "occupation": "Frontend Developer",
+    "description": "Learn the basics of HTML, CSS, and JavaScript to build your first website.",
+    "lesson_count": 20,
+    "student_count": 1500,
+    "price": 49.99,
+    "ratings": 4.5
+  },
+  {
+    "id": 2,
+    "image": "https://images.unsplash.com/photo-1642649149963-0ef6779df6c6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "title": "Mastering Python Programming Programming ",
+    "author": "David Kim",
+    "occupation": "Software Engineer",
+    "description": "An in-depth Python course that covers everything from syntax to data analysis.",
+    "lesson_count": 35,
+    "student_count": 3200,
+    "price": 59.99,
+    "ratings": 4.8
+  },
+  {
+    "id": 3,
+    "image": "https://images.unsplash.com/photo-1642649149963-0ef6779df6c6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "title": "UI/UX Design Fundamentals",
+    "author": "Emily Zhang",
+    "occupation": "UI/UX Designer",
+    "description": "Understand user interface and user experience design principles and tools.",
+    "lesson_count": 18,
+    "student_count": 950,
+    "price": 39.99,
+    "ratings": 4.6
+  },
+  {
+    "id": 4,
+    "image": "https://images.unsplash.com/photo-1642649149963-0ef6779df6c6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "title": "Data Structures and Algorithms",
+    "author": "Mark Thompson",
+    "occupation": "Senior Software Developer",
+    "description": "Improve your problem-solving skills by learning essential algorithms and data structures.",
+    "lesson_count": 40,
+    "student_count": 2100,
+    "price": 69.99,
+    "ratings": 4.7
+  },
+  {
+    "id": 5,
+    "image": "https://images.unsplash.com/photo-1642649149963-0ef6779df6c6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "title": "Digital Marketing Essentials",
+    "author": "Linda Martinez",
+    "occupation": "Digital Marketing Expert",
+    "description": "Learn how to grow a business online using SEO, social media, and email marketing.",
+    "lesson_count": 25,
+    "student_count": 1800,
+    "price": 44.99,
+    "ratings": 4.4
+  }
+]
