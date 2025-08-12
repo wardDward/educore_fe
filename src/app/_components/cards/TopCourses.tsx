@@ -1,5 +1,5 @@
 import Card from '@/app/_components/cards/Card'
-import ProductData from "@/app/data/data.json";
+import ProductData from "@/app/_data/data.json";
 function TopCourses() {
   return (
     <div className="p-[20px] md:p-[20px] flex justify-center items-center">
