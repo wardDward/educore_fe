@@ -1,4 +1,4 @@
-import Card from '@/app/components/cards/Card'
+import Card from '@/app/_components/cards/Card'
 import ProductData from "@/app/data/data.json";
 function TopCourses() {
   return (
