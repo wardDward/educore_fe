@@ -1,5 +1,5 @@
 import Image from "next/image";
-import TopCourses from "@/app/components/cards/TopCourses";
+import TopCourses from "@/app/_components/cards/TopCourses";
 export default function Home() {
   return (
     <>
