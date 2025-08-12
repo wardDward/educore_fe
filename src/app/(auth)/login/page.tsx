@@ -1,0 +1,43 @@
+import Image from 'next/image'
+import Link from 'next/link'
+
+
+function Home() {
+    return (
+        <section className='flex justify-center items-center h-screen bg-gradient-to-r from-purpleIndigo to-darkPurpleIndigo'>
+            <div className='bg-white w-full md:w-[50%] lg:w-[30%] xl:w-[25%] px-2 py-5 shadow-lg rounded-md border-[1px] border-gray-100'>
+                <div className='flex justify-center'>
+                    <div className='relative w-[80px] h-[80px]'>
+                        <Image
+                            src="/assets/logo.png"
+                            fill
+                            alt="Logo"
+                            className=" object-contain"
+                        />
+                    </div>
+
+                </div>
+                <div className='mt-4 px-2'>
+                    <form action="">
+                        <div className='flex flex-col mb-3'>
+                            <label htmlFor="email" className='text-md'>Email</label>
+                            <input type="email" name="email" id="email" className='w-full border-[1px] border-gray-400 py-1 rounded-md outline-none px-2' />
+                        </div>
+                        <div className='flex flex-col mb-3'>
+                            <label htmlFor="password" className='text-md'>Password</label>
+                            <input type="password" name="password" id="password" className='w-full border-[1px] border-gray-400 py-1 rounded-md outline-none px-2' />
+                        </div>
+                        <div className='mt-3'>
+                            <button type="submit" className='text-md w-full bg-purpleIndigo hover:bg-darkPurpleIndigo cursor-pointer py-1 text-white tracking-wide rounded-md'>Sign In</button>
+                        </div>
+                    </form>
+                </div>
+                <p className='text-center mt-4'>Don't have an account?
+                    <Link href="/register" className="text-purpleIndigo hover:underline ml-1">Sign up</Link>
+                </p>
+            </div>
+        </section>
+    )
+}
+
+export default Home
