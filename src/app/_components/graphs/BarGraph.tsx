@@ -51,9 +51,11 @@ function BarGraph() {
             legend: { position: "top" },
         },
     }
-    useEffect(() => {
-        return () => { barRef.current?.destroy() }
-    })
+     useEffect(() => {
+           return () => {
+               barRef.current?.destroy()
+           }
+       },[])
     return (
         <div className='w-full h-full'>
             <Bar ref={barRef} data={data} options={chartOptions} />
