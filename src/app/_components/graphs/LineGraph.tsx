@@ -1,5 +1,5 @@
 "use client"
-import React, { useRef } from 'react'
+import React, { useRef ,useEffect} from 'react'
 import { Line } from 'react-chartjs-2'
 import {
     Chart as ChartJS,
@@ -47,7 +47,11 @@ function LineGraph() {
             legend: { position: "top" }
         }
     }
-
+    useEffect(() => {
+        return () => {
+            lineRef.current?.destroy()
+        }
+    },[])
     return (
     <div className="w-full h-full">
             <Line ref={lineRef} data={line_data} options={chartOptions} />
