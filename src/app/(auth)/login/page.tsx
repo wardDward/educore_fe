@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-
 function Home() {
     return (
         <section className='flex justify-center items-center h-screen bg-gradient-to-r from-purpleIndigo to-darkPurpleIndigo'>

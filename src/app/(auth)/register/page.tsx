@@ -1,7 +1,12 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import React from 'react'
+import { Metadata } from 'next'
 
+
+export const metadata : Metadata = {
+    title: 'Create account'
+}
 function Register() {
     return (
         <section className='flex justify-center items-center h-screen bg-gradient-to-r from-purpleIndigo to-darkPurpleIndigo'>
