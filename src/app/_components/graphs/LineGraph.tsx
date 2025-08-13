@@ -49,7 +49,7 @@ function LineGraph() {
     }
 
     return (
-        <div>
+    <div className="w-full h-full">
             <Line ref={lineRef} data={line_data} options={chartOptions} />
         </div>
     )
