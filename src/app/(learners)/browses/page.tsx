@@ -4,7 +4,7 @@ import ProductData from '@/app/_data/data.json';
 import Card from '@/app/_components/cards/Card';
 import SelectForm from "../_components/forms/SelectForm";
 
-function Browse() {
+function Home() {
   return (
     <section>
       <div className="w-full px-4 md:px-6 py-3">
@@ -47,4 +47,4 @@ function Browse() {
   );
 }
 
-export default Browse;
+export default Home;

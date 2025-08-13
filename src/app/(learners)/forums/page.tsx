@@ -1,7 +1,7 @@
 import React from "react";
 import { tabs } from "@/app/_data/tab";
 import Link from "next/link"
-function Forum() {
+function Home() {
   return (
     <div className="p-4">
       <div className="flex items-center justify-between">
@@ -63,4 +63,4 @@ function Forum() {
   );
 }
 
-export default Forum;
+export default Home;
