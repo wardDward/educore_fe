@@ -2,8 +2,8 @@ import React from 'react'
 
 function CurrentLessons() {
   return (
-    <div className='w-full'>
-      <div>
+    <div className='w-full mt-[15px]'>
+      <div className="px-2">
         <h3 className='text-gray-700'>Current Lessons</h3>
       </div>
       <div className='gap-2 flex whitespace-nowrap overflow-x-auto  p-2'>
