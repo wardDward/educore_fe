@@ -4,7 +4,7 @@ import React from "react";
 export const metadata = {
   title: "Dashboard"
 }
-function Index() {
+function Home() {
   return (
     <div className="p-[20px]">
       <div className="w-full h-full min-h-[450px] bg-white shadow-lg border-[1px] rounded-3xl dashboard-svg p-[50px]">
