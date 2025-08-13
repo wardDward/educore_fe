@@ -1,10 +1,11 @@
 import Link from "next/link";
 import  React, {useState } from "react";
 import { IoChevronDownOutline } from "react-icons/io5";
+import { Links } from "../interface/Links";
 
 
 export interface props {
-  links: [];
+  links: Links[];
   title: string;
 }
 // hide this when small screen make it hamburger menu use the navlinks data
