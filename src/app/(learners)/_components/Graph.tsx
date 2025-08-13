@@ -1,9 +1,19 @@
 "use client"
-import LineGraph from '@/app/_components/graphs/LineGraph'
-import DoughnutGraph from '@/app/_components/graphs/DoughnutGraph'
-import BarGraph from '@/app/_components/graphs/BarGraph'
-import React from 'react'
 
+import React from 'react'
+import LoadingSpinner from '@/app/_common/LoadingSpinner'
+import dynamic from 'next/dynamic'
+
+
+const LineGraph = dynamic(() => import('@/app/_components/graphs/LineGraph'), {
+  loading: () => <LoadingSpinner width={'8'} height={'8'}/>,
+})
+const DoughnutGraph = dynamic(() => import('@/app/_components/graphs/DoughnutGraph'), {
+  loading: () => <LoadingSpinner width={'8'} height={'8'}/>,
+})
+const BarGraph = dynamic(() => import('@/app/_components/graphs/BarGraph'), {
+  loading: () => <LoadingSpinner width={'8'} height={'8'}/>,
+})
 function Graph() {
   return (
     <div>
