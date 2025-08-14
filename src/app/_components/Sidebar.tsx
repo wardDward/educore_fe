@@ -1,18 +1,18 @@
 import Link from "next/link";
 import  React, {useState } from "react";
 import { IoChevronDownOutline } from "react-icons/io5";
+import { FaChevronLeft } from "react-icons/fa6";
 import { Links } from "../interface/Links";
 
 
 export interface props {
   links: Links[];
   title: string;
+  toggle: boolean;
+  onToggle: () => void;
 }
-// hide this when small screen make it hamburger menu use the navlinks data
-function Sidebar({ links, title = "LMS" }: props) {
-  const [isToggle, setIsToggle] = useState<Boolean>(true);
+function Sidebar({ links, title = "LMS", toggle ,onToggle }: props) {
   const [isOpen, setIsOpen] = useState<any>({});
-
   const openGroup = (linkName: string) => {
     setIsOpen((prev: any) => ({
       ...prev,
@@ -26,12 +26,9 @@ function Sidebar({ links, title = "LMS" }: props) {
         <h2 className="text-purpleIndigo text-xl lg:text-2xl tracking-wider font-[500] mb-2 pt-[10px] px-[9px]">
           {title}
         </h2>
-        <label
-          className="inline-flex items-center cursor-pointer"
-        >
-          <input type="checkbox" value="" className="sr-only peer" />
-          <div className="relative w-11 h-4 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-darkPurpleIndigo dark:peer-focus:ring-purpleIndigo rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-purpleIndigo dark:peer-checked:bg-purpleIndigo"></div>
-        </label>
+        <div onClick={onToggle} className="p-2 rounded-full hover:bg-slate-100 hover:text-purpleIndigo cursor-pointer">
+          <FaChevronLeft size={14} className={`transition-transform ${toggle ? '-rotate-180' : ''}`}/>
+        </div>
       </div>
 
       <div className="mt-2">
