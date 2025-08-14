@@ -70,7 +70,9 @@ function Layout({ children }: LayoutProps) {
     return (
         <section className="flex">
             <Sidebar links={links} toggle={toggle} onToggle={sendData} />
-            <div className="flex flex-col w-full md:w-[calc(100%-180px)] lg:w-[calc(100%-250px)] ml-0 md:ml-[180px] lg:ml-[250px]">
+            <div className={`flex flex-col ${toggle ? 'w-full md:w-[calc(100%-180px)] lg:w-[calc(100%-250px)] ml-0 md:ml-[180px] lg:ml-[250px]' 
+                : 'md:w-[calc(100%-60px)] md:ml-[60px]'
+                 }`}>
                 <Navbar/>
                 {children}
             </div>
