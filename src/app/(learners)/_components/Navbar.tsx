@@ -6,7 +6,7 @@ import Link from 'next/link';
 function Navbar() {
   return (
     <div className="bg-white h-[100px] flex items-center justify-between px-[20px] border-b-[2px] border-purpleIndigo">
-      <div>Breadcrumb dito</div>
+      <div>Panghide and show ng sidebar</div>
       <div className="flex items-center gap-2">
         <div className="hover:text-purple-600 transition duration-200 cursor-pointer hover:scale-130">
           <LuMessageCircle size={26} />
