@@ -1,19 +1,19 @@
+import React, { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import React, { useRef, useState } from "react";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { Links } from "../interface/Links";
 import useClickOutside from "../_hooks/useClickOutside";
-
-export interface props {
+export interface Props {
   links: Links[];
   toggle: boolean;
   onToggle: () => void;
 }
 
-function Sidebar({ links, toggle, onToggle }: props) {
-  const [isOpen, setIsOpen] = useState<any>({});
-  const sidebar = useRef<HTMLDivElement>(null)
+function Sidebar({ links, toggle, onToggle }: Props) {
+  const [isOpen, setIsOpen] = React.useState<any>({});
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
   const openGroup = (linkName: string) => {
     setIsOpen((prev: any) => ({
       ...prev,
@@ -21,24 +21,26 @@ function Sidebar({ links, toggle, onToggle }: props) {
     }));
   };
 
-  //for link closing
   const handleLinkClick = () => {
     if (window.innerWidth < 768) {
       onToggle();
     }
   };
 
-  useClickOutside(sidebar, onToggle)
+  useClickOutside(sidebarRef, () => {
+    if (window.innerWidth < 768 && toggle) {
+      onToggle();
+    }
+  });
 
   return (
-    //translate condition is for sm/mobile reso hidding the sidebar
     <div
-      ref={sidebar}
+      ref={sidebarRef}
       className={`bg-white border-r border-slate-200 fixed inset-y-0 flex flex-col
         transform transition-transform duration-300 ease-in-out z-[99999]
         ${toggle ? "translate-x-0" : "-translate-x-full"} 
         md:translate-x-0
-        ${toggle ? "w-[250px]" : "w-[60px]"}
+        ${toggle ? "w-[320px] md:w-[180px] lg:w-[250px]" : "w-[60px]"}
         p-[10px]`}
     >
       <div className="flex items-center">
@@ -48,7 +50,7 @@ function Sidebar({ links, toggle, onToggle }: props) {
           </div>
           {toggle && (
             <span className="text-purpleIndigo text-xl lg:text-lg tracking-wider font-[500]">
-              Educore 
+              Educore
             </span>
           )}
         </h2>
