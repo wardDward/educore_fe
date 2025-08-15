@@ -1,12 +1,20 @@
 import React from "react";
 import { LuMessageCircle } from "react-icons/lu";
 import { MdNotificationsNone } from "react-icons/md";
+import { FiMenu } from "react-icons/fi";
 import Link from 'next/link';
 
-function Navbar() {
+type Props = {
+  toggle: boolean;
+  onToggle: () => void;
+}
+
+function Navbar({toggle, onToggle}: Props) {
   return (
     <div className="bg-white h-[100px] flex items-center justify-between px-[20px] border-b-[2px] border-purpleIndigo">
-      <div>Panghide and show ng sidebar</div>
+         <div onClick={onToggle} className="p-2 rounded-full hover:bg-slate-100 hover:text-purpleIndigo cursor-pointer">
+          <FiMenu size={20} className={`transition-transform ${toggle ? '-rotate-180' : ''}`} />
+        </div>
       <div className="flex items-center gap-2">
         <div className="hover:text-purple-600 transition duration-200 cursor-pointer hover:scale-130">
           <LuMessageCircle size={26} />

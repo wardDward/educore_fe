@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from 'next/image'
 import React, { useState } from "react";
 import { IoChevronDownOutline } from "react-icons/io5";
-import { FaChevronLeft } from "react-icons/fa6";
 import { Links } from "../interface/Links";
 
 
@@ -21,17 +20,15 @@ function Sidebar({ links, toggle, onToggle }: props) {
   };
  
   return (
-    <div className={`bg-white border-r-[1px] border-slate-200 fixed inset-y-0 hidden md:flex flex-col ${toggle ? 'w-[180px] lg:w-[250px]' : 'w-[60px]'} p-[10px] z-[99999]`}>
-      <div className="flex items-center justify-between">
+    <div className={`bg-white border-r-[1px] border-slate-200 fixed inset-y-0 hidden md:flex flex-col ${toggle ? 
+    'w-[180px] lg:w-[250px]' : 'w-[60px]'} p-[10px] z-[99999]`}>
+      <div className="flex items-center">
         <h2 className="mb-2 pt-[10px] flex items-center">
            <div className="relative h-[40px] w-[40px]">
               <Image fill src="/icon.png" alt=""/>
             </div>
           {toggle ? (<span className="text-purpleIndigo text-xl lg:text-lg tracking-wider font-[500]">Educore</span>) : ''}
         </h2>
-        <div onClick={onToggle} className="p-2 rounded-full hover:bg-slate-100 hover:text-purpleIndigo cursor-pointer">
-          <FaChevronLeft size={14} className={`transition-transform ${toggle ? '-rotate-180' : ''}`} />
-        </div>
       </div>
 
       <div className="mt-2">
