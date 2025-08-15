@@ -21,7 +21,7 @@ function Sidebar({ links, toggle, onToggle }: props) {
   };
  
   return (
-    <div className={`bg-white border-r-[1px] border-slate-200 fixed inset-y-0 hidden md:flex flex-col w-[60px] ${toggle ? 'w-[180px] lg:w-[250px]' : 'w-[60px]'} p-[10px] z-[99999]`}>
+    <div className={`bg-white border-r-[1px] border-slate-200 fixed inset-y-0 hidden md:flex flex-col ${toggle ? 'w-[180px] lg:w-[250px]' : 'w-[60px]'} p-[10px] z-[99999]`}>
       <div className="flex items-center justify-between">
         <h2 className="mb-2 pt-[10px] flex items-center">
            <div className="relative h-[40px] w-[40px]">
