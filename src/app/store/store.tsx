@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { authApi } from './services/authServices'
+import authSlice from './feature/authSlice';
 
 // const dummyReducer = (state = {}, action: any) => state
 
@@ -7,6 +8,7 @@ export const makeStore = () => {
   return configureStore({
     reducer: {
         [authApi.reducerPath]: authApi.reducer,
+        auth: authSlice
     },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(authApi.middleware),

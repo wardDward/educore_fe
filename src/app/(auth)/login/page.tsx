@@ -2,14 +2,16 @@
 import { useLoginMutation } from '@/app/store/services/authServices'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { handleInput } from '../../utils/handleInput';
+import { useDispatch } from 'react-redux'
 
 interface FormType {
     email: string;
     password: string;
 }
 function Home() {
+    const dispatch = useDispatch()
     const [formData, setFormData] = useState<FormType>({
         email: '',
         password: ''
@@ -21,8 +23,9 @@ function Home() {
 
     const [login, { data, isLoading }] = useLoginMutation()
 
-    const handleSubmit = async () => {
-        await login(formData)
+    const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        const res = await login(formData)
     }
 
     return (
@@ -40,9 +43,9 @@ function Home() {
 
                 </div>
                 <div className='mt-4 px-2'>
-                    <form action="">
+                    <form onSubmit={(e) => handleSubmit(e)}>
                         <div className='flex flex-col mb-3'>
-                            <label htmlFor="email" className='text-md'>Email                             {formData.email}
+                            <label htmlFor="email" className='text-md'>Email
                             </label>
                             <input type="email" onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                                 inputState(e)} name="email" id="email" className='w-full border-[1px] border-gray-400 py-1 rounded-md outline-none px-2' />
