@@ -38,6 +38,8 @@ function Home() {
                             fill
                             alt="Logo"
                             className=" object-contain"
+                            priority
+                            sizes="(max-width: 768px) 100vw, 50vw"
                         />
                     </div>
 
