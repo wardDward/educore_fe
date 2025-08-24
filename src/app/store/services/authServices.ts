@@ -1,13 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { rawBaseQuery } from "../_lib/baseQueryWithReauth";
 
+
+const api = `${process.env.NEXT_PUBLIC_BACKEND_APP_URL}/api/auth`
 export const authApi = createApi({
     reducerPath: 'authApi',
-    baseQuery:  rawBaseQuery,
+    baseQuery:  fetchBaseQuery({baseUrl: api}),
     endpoints: (builder) => ({
         login: builder.mutation({
             query: (payload: {email: string, password: string}) => ({
-                url: '/login',
+                url: 'login',
                 method: "POST",
                 body: payload
             })
