@@ -4,14 +4,21 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FormEvent, useState } from 'react'
 import { handleInput } from '../../utils/handleInput';
-import { useDispatch } from 'react-redux'
+import LoadingSpinner from '@/app/_common/LoadingSpinner'
+import { useAppDispatch, useAppSelectror } from '../../store/hook';
+import { CustomError } from '@/app/interface/CustomError'
+import { setError } from '@/app/store/feature/authSlice'
+import { redirect, useRouter } from 'next/navigation'
+
 
 interface FormType {
     email: string;
     password: string;
 }
 function Home() {
-    const dispatch = useDispatch()
+    const router = useRouter()
+    const dispatch = useAppDispatch()
+    const authState = useAppSelectror(state => state.auth)
     const [formData, setFormData] = useState<FormType>({
         email: '',
         password: ''
@@ -21,11 +28,26 @@ function Home() {
         handleInput(e, formData, setFormData)
     }
 
-    const [login, { data, isLoading }] = useLoginMutation()
+    const [login, { data, isLoading, reset }] = useLoginMutation()
 
-    const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        const res = await login(formData)
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        try {
+            const data = await login(formData).unwrap();
+            console.log(data)
+            router.replace('/dashboard');
+        } catch (err) {
+            const castError = err as CustomError;
+            if (castError.data?.errors) {
+                dispatch(setError(castError.data.errors));
+                setFormData({
+                    ...formData,
+                    password: ''
+                });
+            }
+        }
+
     }
 
     return (
@@ -42,7 +64,6 @@ function Home() {
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
                     </div>
-
                 </div>
                 <div className='mt-4 px-2'>
                     <form onSubmit={(e) => handleSubmit(e)}>
@@ -50,14 +71,17 @@ function Home() {
                             <label htmlFor="email" className='text-md'>Email
                             </label>
                             <input type="email" onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                inputState(e)} name="email" id="email" className='w-full border-[1px] border-gray-400 py-1 rounded-md outline-none px-2' />
+                                inputState(e)} name="email" id="email" className='w-full border-[1px] border-gray-400 py-1 rounded-md outline-none px-2' value={formData.email} />
                         </div>
                         <div className='flex flex-col mb-3'>
                             <label htmlFor="password" className='text-md'>Password</label>
-                            <input type="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => inputState(e)} name="password" id="password" className='w-full border-[1px] border-gray-400 py-1 rounded-md outline-none px-2' />
+                            <input type="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => inputState(e)} name="password" id="password" className='w-full border-[1px] border-gray-400 py-1 rounded-md outline-none px-2' value={formData.password} />
                         </div>
                         <div className='mt-3'>
-                            <button type="submit" className='text-md w-full bg-purpleIndigo hover:bg-darkPurpleIndigo cursor-pointer py-1 text-white tracking-wide rounded-md'>Sign In</button>
+                            <button type="submit" className='text-md w-full bg-purpleIndigo hover:bg-darkPurpleIndigo cursor-pointer py-1 text-white tracking-wide rounded-md flex items-center justify-center'>
+                                {isLoading ? <LoadingSpinner width={1} height={1} /> : ''}
+                                <span className={isLoading ? 'ml-2' : ''}>Sign In</span>
+                            </button>
                         </div>
                     </form>
                 </div>
