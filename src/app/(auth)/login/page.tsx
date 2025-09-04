@@ -18,7 +18,7 @@ interface FormType {
 function Home() {
     const router = useRouter()
     const dispatch = useAppDispatch()
-    const authState = useAppSelectror(state => state.auth)
+    const { error } = useAppSelectror(state => state.auth)
     const [formData, setFormData] = useState<FormType>({
         email: '',
         password: ''
@@ -65,16 +65,18 @@ function Home() {
                     </div>
                 </div>
                 <div className='mt-4 px-2'>
-                    <form onSubmit={(e) => handleSubmit(e)}>
+                    <form onSubmit={(e) => handleSubmit(e)} method='POST'>
                         <div className='flex flex-col mb-3'>
                             <label htmlFor="email" className='text-md'>Email
                             </label>
                             <input type="email" onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                inputState(e)} name="email" id="email" className='w-full border-[1px] border-gray-400 py-1 rounded-md outline-none px-2' value={formData.email} />
+                                inputState(e)} name="email" id="email" className={`w-full border-[1px] border-gray-400 py-1 rounded-md outline-none px-2 ${error?.email ? 'border-red-600' : ''}`} value={formData.email} />
+                            {error?.email && <p className="text-red-600 text-sm">{error.email[0]}</p>}
                         </div>
                         <div className='flex flex-col mb-3'>
                             <label htmlFor="password" className='text-md'>Password</label>
-                            <input type="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => inputState(e)} name="password" id="password" className='w-full border-[1px] border-gray-400 py-1 rounded-md outline-none px-2' value={formData.password} />
+                            <input type="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => inputState(e)} name="password" id="password" className={`w-full border-[1px] border-gray-400 py-1 rounded-md outline-none px-2 ${error?.password ? 'border-red-600' : ''}`} value={formData.password} />
+                            {error?.password && <p className="text-red-600 text-sm">{error.password[0]}</p>}
                         </div>
                         <div className='mt-3'>
                             <button type="submit" className={`text-md w-full py-1 text-white tracking-wide rounded-md flex items-center justify-center ${isLoading ? 'bg-slate-200 cursor-not-allowed text-black' : 'bg-purpleIndigo hover:bg-darkPurpleIndigo cursor-pointer'}`}>
