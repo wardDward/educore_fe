@@ -28,7 +28,7 @@ function Home() {
         handleInput(e, formData, setFormData)
     }
 
-    const [login, { data, isLoading, reset }] = useLoginMutation()
+    const [login, { isLoading, isSuccess, reset }] = useLoginMutation()
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -36,7 +36,8 @@ function Home() {
         try {
             //unwrap removes the {data:}
             const result = await login(formData).unwrap();
-            console.log(result)
+            router.replace('/dashboard')
+            reset()
         } catch (err) {
             const castError = err as CustomError;
             if (castError.data?.errors) {
