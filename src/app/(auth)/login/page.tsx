@@ -8,7 +8,7 @@ import LoadingSpinner from '@/app/_common/LoadingSpinner'
 import { useAppDispatch, useAppSelectror } from '../../store/hook';
 import { CustomError } from '@/app/interface/CustomError'
 import { setError } from '@/app/store/feature/authSlice'
-import { redirect, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 
 interface FormType {
@@ -34,9 +34,9 @@ function Home() {
         e.preventDefault();
 
         try {
-            const data = await login(formData).unwrap();
-            console.log(data)
-            router.replace('/dashboard');
+            //unwrap removes the {data:}
+            const result = await login(formData).unwrap();
+            console.log(result)
         } catch (err) {
             const castError = err as CustomError;
             if (castError.data?.errors) {
@@ -47,7 +47,6 @@ function Home() {
                 });
             }
         }
-
     }
 
     return (
@@ -59,7 +58,7 @@ function Home() {
                             src="/assets/logo.png"
                             fill
                             alt="Logo"
-                            className=" object-contain"
+                            className="object-contain"
                             priority
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
@@ -78,9 +77,9 @@ function Home() {
                             <input type="password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => inputState(e)} name="password" id="password" className='w-full border-[1px] border-gray-400 py-1 rounded-md outline-none px-2' value={formData.password} />
                         </div>
                         <div className='mt-3'>
-                            <button type="submit" className='text-md w-full bg-purpleIndigo hover:bg-darkPurpleIndigo cursor-pointer py-1 text-white tracking-wide rounded-md flex items-center justify-center'>
+                            <button type="submit" className={`text-md w-full py-1 text-white tracking-wide rounded-md flex items-center justify-center ${isLoading ? 'bg-slate-200 cursor-not-allowed text-black' : 'bg-purpleIndigo hover:bg-darkPurpleIndigo cursor-pointer'}`}>
                                 {isLoading ? <LoadingSpinner width={1} height={1} /> : ''}
-                                <span className={isLoading ? 'ml-2' : ''}>Sign In</span>
+                                <span className={isLoading ? 'hidden py-4' : ''}>Sign In</span>
                             </button>
                         </div>
                     </form>
