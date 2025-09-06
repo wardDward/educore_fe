@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelectror } from '../../store/hook';
 import { CustomError } from '@/app/interface/CustomError'
 import { setError } from '@/app/store/feature/authSlice'
 import { useRouter } from 'next/navigation'
+import { jwtDecode } from 'jwt-decode'
 
 
 interface FormType {
@@ -28,7 +29,12 @@ function Home() {
         handleInput(e, formData, setFormData)
     }
 
-    const [login, { isLoading, reset }] = useLoginMutation()
+    const [login, { isLoading }] = useLoginMutation()
+
+    const roleRedirects: Record<string, string> = {
+        learner: "/dashboard",
+        instructor: "/instructor",
+    };
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -36,9 +42,9 @@ function Home() {
         try {
             //unwrap removes the {data:}
             const result = await login(formData).unwrap();
-            //replace base on role
-                        router.push('/dashboard')
-
+            const decoded = jwtDecode<{ role: string }>(result.accessToken)
+            const destination = roleRedirects[decoded.role.toLowerCase()] || "/";
+            router.push(destination);
         } catch (err) {
             const castError = err as CustomError;
             if (castError.data?.errors) {
