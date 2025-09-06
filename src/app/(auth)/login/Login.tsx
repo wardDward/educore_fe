@@ -36,8 +36,7 @@ function Home() {
         try {
             //unwrap removes the {data:}
             const result = await login(formData).unwrap();
-            router.replace('/dashboard')
-            reset()
+            router.push('/dashboard')
         } catch (err) {
             const castError = err as CustomError;
             if (castError.data?.errors) {

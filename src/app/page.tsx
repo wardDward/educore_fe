@@ -41,6 +41,8 @@ export default function Home() {
                 alt=""
                 fill
                 className="object-cover"
+                sizes="(max-width: 1024px) 340px, 450px"
+                priority
               />
             </div>
           </div>
