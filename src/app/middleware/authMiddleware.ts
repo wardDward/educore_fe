@@ -26,9 +26,8 @@ export async function checkAuth(req: NextRequest): Promise<NextResponse> {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  //store in state manegemnt 
   const role = decoded.role.toLowerCase();
-
+  
 
   if (["/login", "/register"].includes(path)) {
     if (role === "learner") return NextResponse.redirect(new URL("/dashboard", req.url));
