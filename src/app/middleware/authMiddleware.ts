@@ -1,41 +1,49 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { jwtVerify } from "jose";
 
-export function checkAuth(req: NextRequest) {
-    const token = req.cookies.get("access_token")?.value;
-    const role = req.cookies.get("Role")?.value;
-    const path = req.nextUrl.pathname;
+export type JwtPayload = {
+  sub: number;
+  role: string;
+};
 
-    //      return new NextResponse(
-    //     JSON.stringify({ path, role, token }),
-    //     { status: 200, headers: { "Content-Type": "application/json" } }
-    //   );
+export async function checkAuth(req: NextRequest): Promise<NextResponse> {
+  const token = req.cookies.get("accessToken")?.value;
+  const path = req.nextUrl.pathname;
 
-    // if has token
-    if (token && (path === "/login" || path === "/register")) {
-        if (role?.toLowerCase() === "learner") return NextResponse.redirect(new URL("/dashboard", req.url));
-        if (role?.toLowerCase() === "instructor") return NextResponse.redirect(new URL("/instructor", req.url));
-        return NextResponse.redirect(new URL("/", req.url));
+  if (!token) {
+    if (!["/login", "/register"].includes(path)) {
+      return NextResponse.redirect(new URL("/login", req.url));
     }
-
-    if (!token && path !== "/login" && path !== "/register") {
-        return NextResponse.redirect(new URL("/login", req.url));
-    }
-
-    // learner pages
-    const learnerRoutes = ["/dashboard"];
-    if (learnerRoutes.some(r => path.startsWith(r))) {
-        if (role !== "learner") {
-            return NextResponse.redirect(new URL("/login", req.url));
-        }
-    }
-
-    // instructor pages
-    if (path.startsWith("/instructor") && role !== "instructor") {
-        return NextResponse.redirect(new URL("/login", req.url));
-    }
-
     return NextResponse.next();
+  }
+
+  let decoded: JwtPayload;
+  try {
+    const encoder = new TextEncoder();
+    const { payload } = await jwtVerify(token, encoder.encode(process.env.ACCESS_TOKEN));
+    decoded = payload as unknown as JwtPayload;
+  } catch (err) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
+
+  //store in state manegemnt 
+  const role = decoded.role.toLowerCase();
+
+
+  if (["/login", "/register"].includes(path)) {
+    if (role === "learner") return NextResponse.redirect(new URL("/dashboard", req.url));
+    if (role === "instructor") return NextResponse.redirect(new URL("/instructor", req.url));
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+
+  const learnerRoutes = ["/dashboard", "/profile"];
+  if (learnerRoutes.some(r => path.startsWith(r)) && role !== "learner") {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
+
+  if (path.startsWith("/instructor") && role !== "instructor") {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
+
+  return NextResponse.next();
 }
-
-

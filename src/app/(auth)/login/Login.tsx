@@ -36,7 +36,9 @@ function Home() {
         try {
             //unwrap removes the {data:}
             const result = await login(formData).unwrap();
-            router.push('/dashboard')
+            //replace base on role
+                        router.push('/dashboard')
+
         } catch (err) {
             const castError = err as CustomError;
             if (castError.data?.errors) {
